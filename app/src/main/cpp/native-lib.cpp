@@ -43,7 +43,7 @@ Java_com_baishan_ndkdemo_VoiceFix_fix(JNIEnv *env, jclass type, jstring path_, j
     void *extradriverdata;
     Channel *channel;
     bool isplaying = true;
-
+    DSP *dsp;
     try {
         System_Create(&system);
         system->init(32, FMOD_INIT_NORMAL, extradriverdata);
@@ -52,8 +52,16 @@ Java_com_baishan_ndkdemo_VoiceFix_fix(JNIEnv *env, jclass type, jstring path_, j
         switch (mode){
             //原声
             case MODE_NORMAL:
-                //异步操作
+                //播放是异步的
                 system->playSound(sound, 0, false, &channel);
+                break;
+            case MODE_LUOLI:
+                //音效
+                system->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT,&dsp);
+                //改变音调参数
+                dsp->setParameterFloat(FMOD_DSP_PITCHSHIFT_PITCH,2.5);
+                system->playSound(sound, 0, false, &channel);
+                channel->addDSP(0,dsp);
                 break;
         }
     }catch(...) {//...代表捕获所有异常

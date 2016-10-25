@@ -4,10 +4,13 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds it for you.
 # Gradle automatically packages shared libraries with your APK.
+
+
 
 add_library( # Sets the name of the library.
              native-lib
@@ -19,6 +22,22 @@ add_library( # Sets the name of the library.
              # Associated headers in the same location as their source
              # file are automatically included.
              src/main/cpp/native-lib.cpp )
+add_library( fmod
+             SHARED
+             IMPORTED )
+add_library( fmodL
+             SHARED
+             IMPORTED )
+ set_target_properties(
+                       fmod
+                       PROPERTIES IMPORTED_LOCATION
+                       ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI}/libfmod.so
+ )
+ set_target_properties(
+                       fmodL
+                       PROPERTIES IMPORTED_LOCATION
+                       ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI}/libfmodL.so
+ )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because system libraries are included in the search path by
@@ -39,8 +58,9 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
-
+                        fmod
+                        fmodL
                        # Links the target library to the log library
                        # included in the NDK.
-                       ${log-lib} )
+                       ${log-lib})
 
