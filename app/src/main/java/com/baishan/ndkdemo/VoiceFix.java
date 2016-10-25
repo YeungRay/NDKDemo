@@ -15,10 +15,10 @@ public class VoiceFix {
 
     public static native void fix(String path,int mode);
 
-
-//    static {
-//        System.loadLibrary("fmod");
-//        System.loadLibrary("fmodL");
-//    }
+    static {
+        System.loadLibrary("fmod");
+        System.loadLibrary("fmodL");
+        System.loadLibrary("voiceFix");
+    }
 
 }

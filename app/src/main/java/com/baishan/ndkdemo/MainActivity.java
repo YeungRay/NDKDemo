@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        tv.setText("");
     }
 
     public void play(View v){
@@ -31,18 +31,7 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-
-    public native String stringFromJNI2();
 
     // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("fmod");
-        System.loadLibrary("fmodL");
-        System.loadLibrary("native-lib");
-    }
+
 }

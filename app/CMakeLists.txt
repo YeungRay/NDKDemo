@@ -13,7 +13,7 @@ cmake_minimum_required(VERSION 3.4.1)
 
 
 add_library( # Sets the name of the library.
-             native-lib
+             voiceFix
 
              # Sets the library as a shared library.
              SHARED
@@ -21,7 +21,7 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              # Associated headers in the same location as their source
              # file are automatically included.
-             src/main/cpp/native-lib.cpp )
+             src/main/cpp/voiceFix.cpp )
 add_library( fmod
              SHARED
              IMPORTED )
@@ -57,7 +57,7 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-                       native-lib
+                       voiceFix
                         fmod
                         fmodL
                        # Links the target library to the log library
